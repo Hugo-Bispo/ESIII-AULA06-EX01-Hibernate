@@ -1,10 +1,35 @@
 package model;
 
+import org.hibernate.annotations.ManyToAny;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "cliente")
 public class Cliente {
+	
+	@Id
+	@Column(name = "cpf", length = 11)
+	@NotNull
 	private char cpf;
+	
+	@Column(name = "nome", length = 50)
+	@NotNull
 	private String nome;
+	
+	@Column(name = "telefone", length = 11)
+	@NotNull
 	private char telefone;
+	
+	@Column(name = "email")
+	@NotNull
 	private String email;
+	
+	@Column(name = "apelido", length = 20)
 	private char apelido;
 	public char getCpf() {
 		return cpf;

@@ -2,21 +2,48 @@ package model;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.ManyToAny;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "atendimento")
 public class Atendimento {
-	private int id_atendente;
-	private int id_funcionario;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "id_atendente")
+	@NotNull
+	private Atendente atendente;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "cpf")
+	@NotNull
+	private Cliente cliente;
+	
+	@Id
+	@Column(name = "data_hora")
+	@NotNull
 	private LocalDate data_hora;
-	public int getId_atendente() {
-		return id_atendente;
+	
+	public Atendente getId_atendente() {
+		return atendente;
 	}
-	public void setId_atendente(int id_atendente) {
-		this.id_atendente = id_atendente;
+	public void setId_atendente(Atendente atendente) {
+		this.atendente = atendente;
 	}
-	public int getId_funcionario() {
-		return id_funcionario;
+	public Cliente getId_cliente() {
+		return cliente;
 	}
-	public void setId_funcionario(int id_funcionario) {
-		this.id_funcionario = id_funcionario;
+	public void setId_cliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public LocalDate getData_hora() {
 		return data_hora;
@@ -27,7 +54,7 @@ public class Atendimento {
 	
 	@Override
 	public String toString() {
-		return "Atendimento [id_atendente=" + id_atendente + ", id_funcionario=" + id_funcionario + ", data_hora="
+		return "Atendimento [id_atendente=" + atendente + ", id_funcionario=" + cliente + ", data_hora="
 				+ data_hora + "]";
 	}
 	
